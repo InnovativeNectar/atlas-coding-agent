@@ -1,0 +1,10 @@
+typer
+rich
+python-dotenv
+httpx
+PyJWT
+passlib[recommended]
+fastapi
+uvicorn
+pytest
+pytest-asyncio
