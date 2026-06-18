@@ -16,6 +16,10 @@ class SubAgent:
 
     def run(self, task: str) -> str:
         """Execute a task using the agent's persona and tools."""
+        from atlas.core.heartbeat import Heartbeat
+        hb = Heartbeat()
+        hb.vitals["llm_calls"] += 1
+        
         # 1. Gather context
         context = self.harness.get_context()
         context_str = json.dumps(context, indent=2)
@@ -28,4 +32,6 @@ class SubAgent:
         
         # 4. Handle tool calls (Simple parsing for prototype)
         # In a real version, we'd use Structured Outputs or a specific tool-call syntax.
+        hb.vitals["tasks_completed"] += 1
+        hb.save()
         return response
